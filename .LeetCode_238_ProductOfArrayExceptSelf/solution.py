@@ -21,6 +21,7 @@ def productExceptSelf(nums):
                  postfix[i] = nums[i]
                  continue
             postfix[i] = nums[i]*postfix[i+1]
+
         #calculate the output
         output = []
         for i in range(len(nums)):
@@ -35,13 +36,33 @@ def productExceptSelf(nums):
         print("postfix:", postfix)
         return output
 
+def productExceptSelf2(nums):
+     """
+     :type nums: List[int]
+     :rtype: List[int]
+     """
+     output = [1] * len(nums)
+
+     pref = 1
+     for i in range(len(nums)):
+          output[i] = pref
+          pref *= nums[i]
+     #print(output)
+
+     postf = 1
+     for i in range(len(nums) -1, -1, -1):
+          output[i] *= postf
+          postf *= nums[i]
+     
+     return output
+     
 
 
 
 
 def main():
     print("Test1: nums = [-1,1,0,-3,3]")
-    res = productExceptSelf([-1,1,0,-3,3])
+    res = productExceptSelf2([-1,1,0,-3,3])
     print("Result", res)
 
 if __name__ == "__main__":
